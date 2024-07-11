@@ -26,6 +26,13 @@ class MatchError extends Error {
     }
 }
 
+export {
+    SystemError,
+    ContentError,
+    DuplicityError,
+    MatchError,
+};
+
 // Export the errors
 const errors = {
     SystemError,

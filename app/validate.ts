@@ -174,7 +174,7 @@ function validateNumber(number: number, explain: string = 'number'): void {
     }
 }
 
-const validateFunctions = {
+const validate = {
     name: validateName,
     surname: validateSurname,
     birthdate: validateBirthdate,
@@ -188,4 +188,4 @@ const validateFunctions = {
     number: validateNumber
 };
 
-export default validateFunctions;
+export default validate;

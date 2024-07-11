@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Schema, Document, Model } from "mongoose";
 
 const { Types: { ObjectId } } = Schema;
 
@@ -10,7 +10,7 @@ interface UserDoc extends Document {
     birthdate: Date;
     email: string;
     password: string;
-    role: 'regular' | 'admin';
+    role: "regular" | "admin";
 }
 
 interface PostDoc extends Document {
@@ -79,8 +79,8 @@ const userSchema = new Schema<UserDoc>({
     role: {
         type: String,
         required: true,
-        enum: ['regular', 'admin'],
-        default: 'regular'
+        enum: ["regular", "admin"],
+        default: "regular"
     }
 });
 
@@ -88,7 +88,7 @@ const postSchema = new Schema<PostDoc>({
     author: {
         type: ObjectId,
         required: true,
-        ref: 'User'
+        ref: "User"
     },
     title: {
         type: String,
@@ -110,7 +110,7 @@ const postSchema = new Schema<PostDoc>({
     },
     likes: [{
         type: ObjectId,
-        ref: 'User'
+        ref: "User"
     }]
 });
 
@@ -118,12 +118,12 @@ const commentSchema = new Schema<CommentDoc>({
     post: {
         type: ObjectId,
         required: true,
-        ref: 'Post'
+        ref: "Post"
     },
     author: {
         type: ObjectId,
         required: true,
-        ref: 'User'
+        ref: "User"
     },
     text: {
         type: String,
@@ -175,7 +175,7 @@ const orderSchema = new Schema<OrderDoc>({
     buyer: {
         type: ObjectId,
         required: true,
-        ref: 'User'
+        ref: "User"
     },
     cart: cartSchema,
     date: {
@@ -186,13 +186,23 @@ const orderSchema = new Schema<OrderDoc>({
 
 // Definición de modelos
 
-const User: Model<UserDoc> = mongoose.model<UserDoc>('User', userSchema);
-const Post: Model<PostDoc> = mongoose.model<PostDoc>('Post', postSchema);
-const Comment: Model<CommentDoc> = mongoose.model<CommentDoc>('Comment', commentSchema);
-const Product: Model<ProductDoc> = mongoose.model<ProductDoc>('Product', productSchema);
-const Item: Model<ItemDoc> = mongoose.model<ItemDoc>('Item', itemSchema);
-const Cart: Model<CartDoc> = mongoose.model<CartDoc>('Cart', cartSchema);
-const Order: Model<OrderDoc> = mongoose.model<OrderDoc>('Order', orderSchema);
+const User: Model<UserDoc> = mongoose.model<UserDoc>("User", userSchema);
+const Post: Model<PostDoc> = mongoose.model<PostDoc>("Post", postSchema);
+const Comment: Model<CommentDoc> = mongoose.model<CommentDoc>("Comment", commentSchema);
+const Product: Model<ProductDoc> = mongoose.model<ProductDoc>("Product", productSchema);
+const Item: Model<ItemDoc> = mongoose.model<ItemDoc>("Item", itemSchema);
+const Cart: Model<CartDoc> = mongoose.model<CartDoc>("Cart", cartSchema);
+const Order: Model<OrderDoc> = mongoose.model<OrderDoc>("Order", orderSchema);
+
+export type {
+    UserDoc,
+    PostDoc,
+    CommentDoc,
+    ProductDoc,
+    ItemDoc,
+    CartDoc,
+    OrderDoc
+}
 
 export {
     User,
