@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import authenticateUser from '@/logic/authenticateUser';
 import jwt from 'jsonwebtoken';
 import { errors } from 'com';
-import from '@/data/mongo-db.js';
+// import from '@/app/data/mongo-db.js';
 const { MatchError, SystemError, TypeError, RangeError, ContentError } = errors;
 const JWT_SECRET = process.env.JWT_SECRET;
 

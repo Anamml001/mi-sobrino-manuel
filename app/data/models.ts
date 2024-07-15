@@ -84,132 +84,132 @@ const userSchema = new Schema<UserDoc>({
     }
 });
 
-const postSchema = new Schema<PostDoc>({
-    author: {
-        type: ObjectId,
-        required: true,
-        ref: "User"
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String
-    },
-    video: {
-        type: String
-    },
-    text: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true
-    },
-    likes: [{
-        type: ObjectId,
-        ref: "User"
-    }]
-});
+// const postSchema = new Schema<PostDoc>({
+//     author: {
+//         type: ObjectId,
+//         required: true,
+//         ref: "User"
+//     },
+//     title: {
+//         type: String,
+//         required: true
+//     },
+//     image: {
+//         type: String
+//     },
+//     video: {
+//         type: String
+//     },
+//     text: {
+//         type: String,
+//         required: true
+//     },
+//     date: {
+//         type: Date,
+//         required: true
+//     },
+//     likes: [{
+//         type: ObjectId,
+//         ref: "User"
+//     }]
+// });
 
-const commentSchema = new Schema<CommentDoc>({
-    post: {
-        type: ObjectId,
-        required: true,
-        ref: "Post"
-    },
-    author: {
-        type: ObjectId,
-        required: true,
-        ref: "User"
-    },
-    text: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true
-    }
-});
+// const commentSchema = new Schema<CommentDoc>({
+//     post: {
+//         type: ObjectId,
+//         required: true,
+//         ref: "Post"
+//     },
+//     author: {
+//         type: ObjectId,
+//         required: true,
+//         ref: "User"
+//     },
+//     text: {
+//         type: String,
+//         required: true
+//     },
+//     date: {
+//         type: Date,
+//         required: true
+//     }
+// });
 
-const productSchema = new Schema<ProductDoc>({
-    name: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    stock: {
-        type: Number,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    }
-});
+// const productSchema = new Schema<ProductDoc>({
+//     name: {
+//         type: String,
+//         required: true
+//     },
+//     image: {
+//         type: String,
+//         required: true
+//     },
+//     description: {
+//         type: String,
+//         required: true
+//     },
+//     stock: {
+//         type: Number,
+//         required: true
+//     },
+//     price: {
+//         type: Number,
+//         required: true
+//     }
+// });
 
-const itemSchema = new Schema<ItemDoc>({
-    product: productSchema,
-    quantity: {
-        type: Number,
-        default: 1,
-        required: true
-    }
-});
+// const itemSchema = new Schema<ItemDoc>({
+//     product: productSchema,
+//     quantity: {
+//         type: Number,
+//         default: 1,
+//         required: true
+//     }
+// });
 
-const cartSchema = new Schema<CartDoc>({
-    items: [itemSchema]
-});
+// const cartSchema = new Schema<CartDoc>({
+//     items: [itemSchema]
+// });
 
-const orderSchema = new Schema<OrderDoc>({
-    buyer: {
-        type: ObjectId,
-        required: true,
-        ref: "User"
-    },
-    cart: cartSchema,
-    date: {
-        type: Date,
-        required: true
-    }
-});
+// const orderSchema = new Schema<OrderDoc>({
+//     buyer: {
+//         type: ObjectId,
+//         required: true,
+//         ref: "User"
+//     },
+//     cart: cartSchema,
+//     date: {
+//         type: Date,
+//         required: true
+//     }
+// });
 
 // Definición de modelos
 
 const User: Model<UserDoc> = mongoose.model<UserDoc>("User", userSchema);
-const Post: Model<PostDoc> = mongoose.model<PostDoc>("Post", postSchema);
-const Comment: Model<CommentDoc> = mongoose.model<CommentDoc>("Comment", commentSchema);
-const Product: Model<ProductDoc> = mongoose.model<ProductDoc>("Product", productSchema);
-const Item: Model<ItemDoc> = mongoose.model<ItemDoc>("Item", itemSchema);
-const Cart: Model<CartDoc> = mongoose.model<CartDoc>("Cart", cartSchema);
-const Order: Model<OrderDoc> = mongoose.model<OrderDoc>("Order", orderSchema);
+// const Post: Model<PostDoc> = mongoose.model<PostDoc>("Post", postSchema);
+// const Comment: Model<CommentDoc> = mongoose.model<CommentDoc>("Comment", commentSchema);
+// const Product: Model<ProductDoc> = mongoose.model<ProductDoc>("Product", productSchema);
+// const Item: Model<ItemDoc> = mongoose.model<ItemDoc>("Item", itemSchema);
+// const Cart: Model<CartDoc> = mongoose.model<CartDoc>("Cart", cartSchema);
+// const Order: Model<OrderDoc> = mongoose.model<OrderDoc>("Order", orderSchema);
 
 export type {
     UserDoc,
-    PostDoc,
-    CommentDoc,
-    ProductDoc,
-    ItemDoc,
-    CartDoc,
-    OrderDoc
+    // PostDoc,
+    // CommentDoc,
+    // ProductDoc,
+    // ItemDoc,
+    // CartDoc,
+    // OrderDoc
 }
 
 export {
     User,
-    Post,
-    Comment,
-    Product,
-    Item,
-    Cart,
-    Order
+    // Post,
+    // Comment,
+    // Product,
+    // Item,
+    // Cart,
+    // Order
 };

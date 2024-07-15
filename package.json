@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "com": "file:models/src/com",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
     "react": "^18",
