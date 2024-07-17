@@ -18,9 +18,9 @@ function registerUser(name: string, surname: string, birthdate: string, email: s
             throw new SystemError((error as Error).message);
         }
 
-        // if (user) throw new DuplicityError("user already exists");
+        if (user) throw new DuplicityError("user already exists");
 
-        // await User.create({ name, surname, birthdate: new Date(birthdate), email, password });
+        await User.create({ name, surname, birthdate: new Date(birthdate), email, password });
     })()
 }
 
