@@ -1,6 +1,9 @@
-import { User, UserDoc } from "@/app/data/models";
+import { User, Post, PostDoc } from "@/app/data/models";
 import { SystemError, MatchError } from "@/app/errors";
 import validate from "@/app/validate";
+import { Types } from "mongoose";
+
+const {ObjectId } = Types;
 
 interface CreatePostInput {
   userId: string;
@@ -10,46 +13,40 @@ interface CreatePostInput {
   text: string;
 }
 
-async function createPost({ userId, title, image, video, text }: CreatePostInput): Promise<void> {
+function createPost({ userId, title, image, video, text }: CreatePostInput): Promise<PostDoc> {
   validate.id(userId, 'userId');
   validate.text(title, 'title');
-  
+
   if (image) {
     if (video) throw new MatchError('image and video are both set');
     validate.url(image, 'image');
-  } else {
+  } else if (video) {
     validate.url(video, 'video');
   }
 
   validate.text(text);
 
-  let user: UserDoc | null;
+  return User.findById(userId)
+    .catch(error => { throw new SystemError((error as Error).message); })
+    .then(user => {
+      if (!user)
+        throw new MatchError('user not found');
 
-  try {
-    user = await User.findById(userId);
-  } catch (error) {
-    throw new SystemError((error as Error).message);
-  }
+      if (user.role !== 'admin')
+        throw new MatchError('Only admins can create posts');
+      const author = new ObjectId(user.id as string)
+      const post = {
+        author,
+        title,
+        image,
+        video,
+        text,
+        date: new Date()
+      };
 
-  if (!user) throw new MatchError('user not found');
-
-  if (user.role !== 'admin') throw new MatchError('Only admins can create posts');
-
-  const post: Partial<PostDoc> = {
-    author: user._id,
-    title,
-    text,
-    date: new Date()
-  };
-
-  if (image) post.image = image;
-  else if (video) post.video = video;
-
-  try {
-    await Post.create(post);
-  } catch (error) {
-    throw new SystemError((error as Error).message);
-  }
+      return Post.create(post)
+        .catch((error) => { throw new SystemError((error as Error).message); });
+    });
 }
 
 export default createPost;

@@ -1,46 +1,50 @@
-import type { NextApiRequest, NextResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import { errors } from '@/app/errors';
-import createPost from '@/lib/createPost';
-import connect from '@/app/data/connect';
+import errors from '@/app/errors';
+import createPost from '@/app/api/logic/createPost';
 
-const { MatchError, ContentError } = errors;
 
-export default async function handler(req, res: NextResponse) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    return res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
+const { MatchError, SystemError, ContentError} = errors;
 
-  await connect();
+export function POST(req: NextRequest) {
+        return req.json()
+        .then(body => {
+            const token = ('Authorization')?.slice(7);
 
-  try {
-    const { authorization } = req.headers;
+            if (!token) {
+                return NextResponse.json({ error: 'TokenMissingError', message: 'Authorization token is missing' }, { status: 401 });
+            }
 
-    if (!authorization || !authorization.startsWith('Bearer ')) {
-      throw new MatchError('Invalid or missing authorization header');
-    }
+            let userId: string;
+            try {
+                const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+                userId = (decoded as { sub: string }).sub;
+            } catch (error) {
+                const _error = error as jwt.JsonWebTokenError | jwt.TokenExpiredError;
+                return NextResponse.json({ error: 'TokenError', message: _error.message }, { status: 401 });
+            }
 
-    const token = authorization.slice(7);
-    const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET!) as { sub: string };
+            const { title, image, video, text } = body;
 
-    const { title, image, video, text } = req.body;
+            return createPost({ userId, title, image, video, text })
+                .then(() => {
+                    return NextResponse.json(null, {status:201})
+                })
+                .catch(error => {
+                    const _error = error as Error;
 
-    await createPost({ userId, title, image, video, text });
-    return res.status(201).send();
-  } catch (error) {
-    let status = 500;
-    const _error = error as Error;
+                    let status = 500;
+                    if (_error instanceof MatchError) {
+                        status = 404;
+                    } else if (_error instanceof TypeError || _error instanceof RangeError || _error instanceof ContentError) {
+                        status = 400;
+                    }
 
-    if (_error instanceof TypeError || _error instanceof RangeError || _error instanceof ContentError) {
-      status = 400;
-    } else if (_error instanceof MatchError) {
-      status = 401;
-    } else if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
-      status = 401;
-      _error = new MatchError(_error.message);
-    }
-
-    return res.status(status).json({ error: _error.constructor.name, message: _error.message });
-  }
+                    return NextResponse.json({ error: _error.constructor.name, message: _error.message }, { status });
+                });
+        })
+        .catch(error => {
+            const _error = error as Error;
+            return NextResponse.json({ error: SystemError.name, message: _error.message }, { status: 500 });
+        });
 }
