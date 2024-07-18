@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     console.log('DATA', name, surname, birthdate, email, password)
 
     try {
-        await registerUser({ name, surname, birthdate, email, password });
+        await registerUser( name, surname, birthdate, email, password );
 
         return NextResponse.json({ message: 'User registered successfully' })
         // return res.status(200).end(JSON.stringify({ message: 'User registered successfully' }));
