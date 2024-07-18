@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
     "react": "^18",

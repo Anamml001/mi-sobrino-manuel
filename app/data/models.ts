@@ -13,45 +13,45 @@ interface UserDoc extends Document {
     role: "regular" | "admin";
 }
 
-interface PostDoc extends Document {
-    author: typeof ObjectId;
-    title: string;
-    image?: string;
-    video?: string;
-    text: string;
-    date: Date;
-    likes?: typeof ObjectId[];
-}
+// interface PostDoc extends Document {
+//     author: typeof ObjectId;
+//     title: string;
+//     image?: string;
+//     video?: string;
+//     text: string;
+//     date: Date;
+//     likes?: typeof ObjectId[];
+// }
 
-interface CommentDoc extends Document {
-    post: typeof ObjectId;
-    author: typeof ObjectId;
-    text: string;
-    date: Date;
-}
+// interface CommentDoc extends Document {
+//     post: typeof ObjectId;
+//     author: typeof ObjectId;
+//     text: string;
+//     date: Date;
+// }
 
-interface ProductDoc extends Document {
-    name: string;
-    image: string;
-    description: string;
-    stock: number;
-    price: number;
-}
+// interface ProductDoc extends Document {
+//     name: string;
+//     image: string;
+//     description: string;
+//     stock: number;
+//     price: number;
+// }
 
-interface ItemDoc extends Document {
-    product: ProductDoc;
-    quantity: number;
-}
+// interface ItemDoc extends Document {
+//     product: ProductDoc;
+//     quantity: number;
+// }
 
-interface CartDoc extends Document {
-    items: ItemDoc[];
-}
+// interface CartDoc extends Document {
+//     items: ItemDoc[];
+// }
 
-interface OrderDoc extends Document {
-    buyer: typeof ObjectId;
-    cart: CartDoc;
-    date: Date;
-}
+// interface OrderDoc extends Document {
+//     buyer: typeof ObjectId;
+//     cart: CartDoc;
+//     date: Date;
+// }
 
 // Definición de esquemas
 
