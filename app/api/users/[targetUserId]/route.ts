@@ -2,28 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
 import errors from '@/app/errors';
-import connect from '@/app/data/connect';
 import retrieveUser from '../../logic/retrieveUser';
 
 const { MatchError, SystemError } = errors;
 
-export async function GET(req: NextRequest) {
-    await connect();
-
+export async function GET(req: NextRequest, { params }: { params: { targetUserId: string } }) {
     const token = req.headers.get('Authorization')?.slice(7);
 
-    if (!token) {
-        return NextResponse.json({ error: 'No token provided' }, { status: 401 });
-    }
+    const { targetUserId } = params;
 
     try {
-        const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload;
-
-        const targetUserId = req.url.searchParams.get('userId');
-
-        if (!targetUserId) {
-            return NextResponse.json({ error: 'targetUserId parameter is missing' }, { status: 400 });
-        }
+        const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET!);
 
         const user = await retrieveUser(userId, targetUserId);
 

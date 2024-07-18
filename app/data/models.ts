@@ -186,7 +186,7 @@ const userSchema = new Schema<UserDoc>({
 
 // Definición de modelos
 
-const User: Model<UserDoc> = mongoose.model<UserDoc>("User", userSchema);
+const User: Model<UserDoc> = mongoose.models.User || mongoose.model<UserDoc>("User", userSchema);
 // const Post: Model<PostDoc> = mongoose.model<PostDoc>("Post", postSchema);
 // const Comment: Model<CommentDoc> = mongoose.model<CommentDoc>("Comment", commentSchema);
 // const Product: Model<ProductDoc> = mongoose.model<ProductDoc>("Product", productSchema);
