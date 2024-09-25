@@ -1,0 +1,1 @@
+ curl -X PATCH -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3MjE4MzAzMDYsImV4cCI6MTcyMTkxNjcwNn0.RRpA2sqV29Hzvf0dEPPCnzJPK5jcS5RYWsMHp0-1DpQ' -H 'Content-Type: application/json' -d '{"postId": "66a11536c4efa43d3bfdbe78","text":"holaaa soy Manueeel"}' http://localhost:3000/api/posts -v

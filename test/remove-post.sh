@@ -1,0 +1,1 @@
+ curl -X DELETE -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3MjcwOTg2NzMsImV4cCI6MTcyNzE4NTA3M30.-mXof1hsjMdVR1O0aN12Bw9Bpzz1M3k1uC-Te-BD-ms' -d '{"postId":"66a11551c4efa43d3bfdbe7b"}' http://localhost:3000/api/posts -v

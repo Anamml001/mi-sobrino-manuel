@@ -1,0 +1,1 @@
+curl -X PATCH -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3MjcxNjg2MzcsImV4cCI6MTcyNzI1NTAzN30.0tyJwVjH392IU6Ppjt6NFXYleX2jCPgVWqhauETsvtM' -d '{"postId":"66a11536c4efa43d3bfdbe78","commentId":"66f2828bba9a830f23af1305","title":"MANUEL","text":"Hola que tal!"}' http://localhost:3000/api/comments -v

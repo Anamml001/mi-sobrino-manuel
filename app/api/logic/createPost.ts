@@ -5,15 +5,7 @@ import { Types } from "mongoose";
 
 const {ObjectId } = Types;
 
-interface CreatePostInput {
-  userId: string;
-  title: string;
-  image?: string;
-  video?: string;
-  text: string;
-}
-
-function createPost({ userId, title, image, video, text }: CreatePostInput): Promise<PostDoc> {
+function createPost( userId: string, title: string,text: string, image?: string, video?: string): Promise<PostDoc> {
   validate.id(userId, 'userId');
   validate.text(title, 'title');
 

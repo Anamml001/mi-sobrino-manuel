@@ -12,7 +12,7 @@ export async function GET(req: NextRequest, { params }: { params: { targetUserId
     const { targetUserId } = params;
 
     try {
-        const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET!);
+        const { sub: userId }:{sub:string} = jwt.verify(token, process.env.JWT_SECRET!);
 
         const user = await retrieveUser(userId, targetUserId);
 

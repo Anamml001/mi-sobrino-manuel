@@ -1,0 +1,1 @@
+curl -X POST -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3MjcxNjg2MzcsImV4cCI6MTcyNzI1NTAzN30.0tyJwVjH392IU6Ppjt6NFXYleX2jCPgVWqhauETsvtM' -H 'Content-type: application/json' -d '{"postId":"66a11536c4efa43d3bfdbe78","text":"I am a comment happy"}' http://localhost:3000/api/comments -v

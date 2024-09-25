@@ -1,0 +1,1 @@
+curl -X PUT -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3MjcxODY4MDIsImV4cCI6MTcyNzI3MzIwMn0.hFgSUJZmX70JqBOwrxUY1374PSq7bMzgKvnZbRaSbF4' -H 'Content-type: application/json' -d '{"postId":"66a11536c4efa43d3bfdbe78"}' http://localhost:3000/api/posts -v
