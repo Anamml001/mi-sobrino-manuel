@@ -19,6 +19,7 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/react": "^18",
