@@ -7,7 +7,7 @@ import registerAdmin from '@/app/api/logic/registerAdmin';
 const { DuplicityError, SystemError } = errors;
 
 export async function POST(req: NextRequest) {
-    const { name, surname, birthdate, email, password }:{name: string, surname: string, birthdate: string, email: string, password: string} = await req.json();
+    const { name, surname, birthdate, email, password }: { name: string, surname: string, birthdate: string, email: string, password: string } = await req.json();
 
     try {
         await registerAdmin(name, surname, birthdate, email, password);

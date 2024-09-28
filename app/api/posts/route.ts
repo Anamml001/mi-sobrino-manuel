@@ -5,23 +5,11 @@ import createPost from '@/app/api/logic/createPost';
 import removePost from '../logic/removePost';
 import retrievePosts from '../logic/retrievePosts';
 import modifyPost from '../logic/modifyPost';
-import { headers } from 'next/headers';
 import toggleLikePost from '../logic/toggleLikePost';
-
+import verifyToken from '@/app/util/verifyToken';
 const JWT_SECRET: string = process.env.JWT_SECRET as string;
 
-
 const { MatchError, SystemError, ContentError } = errors;
-
-function verifyToken(req: NextRequest) {
-    const authorization: string | null = headers().get('authorization')
-
-    const token: any = authorization?.slice(7)
-
-    const payload: JwtPayload = jwt.verify(token, JWT_SECRET) as { sub: string }
-
-    return payload
-}
 
 //createPost
 export async function POST(req: NextRequest) {
@@ -49,15 +37,12 @@ export async function POST(req: NextRequest) {
 //removePost
 export async function DELETE(req: NextRequest) {
 
-    const { postId }: { postId: string } = await req.json();
-
-    const authorization = headers().get('authorization')
-
-    const token = authorization?.slice(7)
-
-    const { sub: userId }: { sub: string } = jwt.verify(token, JWT_SECRET)
     try {
-        await removePost(userId, postId);
+        const { postId }: { postId: string } = await req.json();
+
+        const { sub: userId } = verifyToken(req)
+
+        await removePost(userId!, postId);
 
         return new NextResponse(null, { status: 201 });
     } catch (error) {
@@ -75,17 +60,14 @@ export async function DELETE(req: NextRequest) {
 //retrievePost
 
 export async function GET(req: NextRequest) {
-    const authorization = req.headers.get('authorization');
-    const token = authorization?.slice(7);
-
-    if (!token) {
-        return NextResponse.json({ error: 'Unauthorized', message: 'Authorization header missing or invalid' }, { status: 401 });
-    }
-
     try {
-        const { sub: userId }: { sub: string } = jwt.verify(token, JWT_SECRET);
 
-        const posts = await retrievePosts(userId);
+        const { sub: userId } = verifyToken(req)
+        if (!userId) {
+            return NextResponse.json({ error: 'Unauthorized', message: 'Authorization header missing or invalid' }, { status: 401 });
+        }
+
+        const posts = await retrievePosts(userId!);
 
         return NextResponse.json(posts, { status: 200 });
     } catch (error) {
@@ -107,14 +89,9 @@ export async function PATCH(req: NextRequest) {
 
     const { postId, text }: { postId: string, text: string } = await req.json();
 
-    const authorization = headers().get('authorization')
-
-    const token = authorization?.slice(7)
-
-    const { sub: userId }: { sub: string } = jwt.verify(token, JWT_SECRET)
-
+    const { sub: userId } = verifyToken(req)
     try {
-        await modifyPost(userId, postId, text);
+        await modifyPost(userId!, postId, text);
 
         return new NextResponse(null, { status: 204 });
     } catch (error) {
@@ -134,14 +111,10 @@ export async function PUT(req: NextRequest) {
 
     const { postId }: { postId: string } = await req.json();
 
-    const authorization = headers().get('authorization')
-
-    const token = authorization?.slice(7)
-
-    const { sub: userId }: { sub: string } = jwt.verify(token, JWT_SECRET)
+    const { sub: userId } = verifyToken(req)
 
     try {
-        await toggleLikePost(userId, postId);
+        await toggleLikePost(userId!, postId);
 
         return new NextResponse(null, { status: 204 });
     } catch (error) {

@@ -5,21 +5,18 @@ import { headers } from 'next/headers';
 import createComment from "../logic/createComment";
 import removeComment from '../logic/removeComment';
 import modifyComment from '../logic/modifyComment';
+import verifyToken from '@/app/util/verifyToken';
 const { JWT_SECRET } = process.env
 
-const { MatchError, SystemError, ContentError} = errors;
+const { MatchError, SystemError, ContentError } = errors;
 //createComment
 export async function POST(req: NextRequest) {
-        
-    const { postId, text }:{postId:string, text:string} = await req.json();
 
-    const authorization = headers().get('authorization')
-    
-    const token = authorization?.slice(7)
+    const { postId, text }: { postId: string, text: string } = await req.json();
 
-    const { sub: userId }:{sub:string}= jwt.verify(token, JWT_SECRET)
+    const { sub: userId } = verifyToken(req)
     try {
-        await createComment(userId, postId, text);
+        await createComment(userId!, postId, text);
 
         return new NextResponse(null, { status: 201 });
     } catch (error) {
@@ -36,16 +33,12 @@ export async function POST(req: NextRequest) {
 }
 //removeComment
 export async function DELETE(req: NextRequest) {
-        
-    const { commentId }:{commentId:string} = await req.json();
 
-    const authorization = headers().get('authorization')
-    
-    const token = authorization?.slice(7)
+    const { commentId }: { commentId: string } = await req.json();
 
-    const { sub: userId }:{sub:string} = jwt.verify(token, JWT_SECRET)
+    const { sub: userId } = verifyToken(req)
     try {
-        await removeComment(userId, commentId);
+        await removeComment(userId!, commentId);
 
         return new NextResponse(null, { status: 201 });
     } catch (error) {
@@ -63,16 +56,12 @@ export async function DELETE(req: NextRequest) {
 
 //modifyComment
 export async function PATCH(req: NextRequest) {
-        
-    const { postId, commentId, text }:{postId:string, commentId:string, text:string} = await req.json();
 
-    const authorization = headers().get('authorization')
-    
-    const token = authorization?.slice(7)
+    const { postId, commentId, text }: { postId: string, commentId: string, text: string } = await req.json();
 
-    const { sub: userId }:{sub:string} = jwt.verify(token, JWT_SECRET)
+    const { sub: userId } = verifyToken(req)
     try {
-        await modifyComment(userId, postId, commentId, text);
+        await modifyComment(userId!, postId, commentId, text);
 
         return new NextResponse(null, { status: 201 });
     } catch (error) {
