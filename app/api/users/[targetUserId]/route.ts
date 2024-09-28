@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
-
+import verifyToken from '@/app/util/verifyToken';
 import errors from '@/app/errors';
 import retrieveUser from '../../logic/retrieveUser';
 
@@ -12,9 +11,9 @@ export async function GET(req: NextRequest, { params }: { params: { targetUserId
     const { targetUserId } = params;
 
     try {
-        const { sub: userId }:{sub:string} = jwt.verify(token, process.env.JWT_SECRET!);
+        const { sub: userId } = verifyToken(req)
 
-        const user = await retrieveUser(userId, targetUserId);
+        const user = await retrieveUser(userId!, targetUserId);
 
         return NextResponse.json(user, { status: 200 });
     } catch (error) {
