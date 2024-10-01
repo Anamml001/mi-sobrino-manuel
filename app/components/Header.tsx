@@ -2,19 +2,76 @@
 "use client"; // Marca este componente como un Client Component
 
 import Image from 'next/image';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+import logic from '../logic';
+import { userData } from '../types/types';
+import errors from '../errors';
+import React, { useEffect, useState } from 'react';
+import useSessionContext from '../useSessionContext';
 
-interface HeaderProps {
-  user?: { name: string };
-  handleLogout: () => void;
-  handleLoginClick: () => void;
-  handleRegisterClick: () => void;
-}
+const { MatchError, ContentError } = errors
 
-const Header: React.FC<HeaderProps> = ({ user, handleLogout, handleLoginClick, handleRegisterClick }) => {
+const Header: React.FC = () => {
+  const { loggedIn, setLoggedIn } = useSessionContext()
+
+  const router = useRouter()
+
+  const [user, setUser] = useState<userData | null>(null)
+
+  useEffect(() => {
+    if (logic.isUserLoggedIn()) {
+      try {
+        logic.retrieveUser()
+          .then((user: userData) => setUser(user))
+          .catch((error: Error) => {
+            console.error(error.message);
+
+            let feedback = error.message;
+
+            if (error instanceof TypeError || error instanceof RangeError || error instanceof ContentError)
+              feedback = `${feedback}, please correct it`;
+            else if (error instanceof MatchError)
+              feedback = `${feedback}, please verify user`;
+            else
+              feedback = 'sorry, there was an error, please try again later';
+
+            alert(feedback);
+          });
+      } catch (error) {
+        console.error((error as Error).message);
+
+        let feedback = (error as Error).message;
+
+        if (error instanceof TypeError || error instanceof RangeError || error instanceof ContentError)
+          feedback = `${feedback}, please correct it`;
+        else
+          feedback = 'sorry, there was an error, please try again later';
+
+        alert(feedback);
+      }
+    }
+
+  }, [loggedIn])
+
+
+  const handleLoginClick = (): void => {
+    router.push("/login")
+  }
+
+  const handleRegisterClick = (): void => {
+    router.push("/register")
+  }
+
+  const handleLogout = (): void => {
+    logic.logoutUser()
+    setLoggedIn(false)
+    setUser(null)
+    router.push("/register")
+  }
+
   return (
     <header className="flex items-center border-b-2 bg-teal-700 border-black fixed top-0 w-full h-15 box-border z-10">
-      {!user ? (
+      {user === null ? (
         <>
           <button className="px-1 rounded-md border mr-2 text-white" onClick={handleRegisterClick}>
             Register
