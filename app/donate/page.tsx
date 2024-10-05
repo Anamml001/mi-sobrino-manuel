@@ -11,7 +11,7 @@ function Donate() {
             <div className="mt-4 lg:mt-12">
                 <img
                     src="/bizum-img.jpg"
-                    className="mx-auto h-auto md:max-w-xs lg:max-w-lg xl:max-w-xl"
+                    className="mx-auto h-96 md:max-w-xs lg:max-w-lg xl:max-w-xl"
                     alt="Bizum"
                 />
             </div>

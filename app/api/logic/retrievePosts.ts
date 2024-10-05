@@ -1,4 +1,4 @@
-import { Post, User } from "@/app/data/models"; 
+import { Post, User } from "@/app/data/models";
 import { MatchError, SystemError } from "@/app/errors";
 import validate from "@/app/validate";
 
@@ -19,36 +19,27 @@ interface PostDocument {
     date: Date;
 }
 
- function retrievePosts(userId: string): Promise<PostDocument[]> {
-    validate.id(userId, 'userId')
-    
-    return( async () => { 
-        try{
-            const user = await User.findById(userId)
-           if(!user)
-            throw new MatchError('user not found')
-        }
-        catch(error){
-            const _error = error as Error;
-            throw new SystemError(_error.message);
-        }
+function retrievePosts(): Promise<PostDocument[]> {
+
+
+    return (async () => {
         try {
             const posts: any[] = await Post.find()
-                .select('-__v') 
-                .populate('author', 'name surname') 
+                .select('-__v')
+                .populate('author', 'name surname')
                 .lean()
                 .catch(error => { throw new SystemError((error as Error).message); });
-    
-           
+
+
             const transformedPosts: PostDocument[] = posts.map(post => {
-               
+
                 const transformedPost: PostDocument = {
-                    id: post._id.toString(), 
+                    id: post._id.toString(),
                     title: post.title,
                     text: post.text,
                     image: post.image,
                     video: post.video,
-                    likes: post.likes.map((userId: any) => userId.toString()), 
+                    likes: post.likes.map((userId: any) => userId.toString()),
                     author: {
                         id: post.author._id.toString(),
                         name: post.author.name,
@@ -56,12 +47,12 @@ interface PostDocument {
                     },
                     date: post.date
                 };
-    
+
                 return transformedPost;
             });
-    
-            return transformedPosts.reverse(); 
-    
+
+            return transformedPosts.reverse();
+
         } catch (error) {
             const _error = error as Error;
             throw new SystemError(_error.message);

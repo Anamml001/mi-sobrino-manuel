@@ -40,7 +40,7 @@ export async function DELETE(req: NextRequest) {
     try {
         await removeComment(userId!, commentId);
 
-        return new NextResponse(null, { status: 201 });
+        return new NextResponse(null, { status: 204 });
     } catch (error) {
         const _error = (error as Error);
 
@@ -63,7 +63,7 @@ export async function PATCH(req: NextRequest) {
     try {
         await modifyComment(userId!, postId, commentId, text);
 
-        return new NextResponse(null, { status: 201 });
+        return new NextResponse(null, { status: 204 });
     } catch (error) {
         const _error = (error as Error);
 

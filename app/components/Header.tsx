@@ -70,28 +70,44 @@ const Header: React.FC = () => {
   }
 
   return (
-    <header className="flex items-center border-b-2 bg-teal-700 border-black fixed top-0 w-full h-15 box-border z-10">
-      {user === null ? (
-        <>
-          <button className="px-1 rounded-md border mr-2 text-white" onClick={handleRegisterClick}>
-            Register
-          </button>
-          <button className="px-1 rounded-md border text-white mr-6" onClick={handleLoginClick}>
-            Login
-          </button>
-        </>
-      ) : (
-        <h1 className="text-white text-start p-8">Hola, {user.name}!</h1>
-      )}
-      <div className="object-center h-20 w-30">
-        <Image src="/logotipo-MSM-04.png" alt="Logo" width={120} height={80} className="h-20 w-30" />
+    <header className="flex items-center justify-between bg-teal-700 border-b-2 fixed top-0 w-full h-20 z-10 p-1"> {/* Cambié h-16 a h-20 */}
+      <div className="flex items-center">
+        {user === null ? (
+          <>
+            <button className="px-3 rounded-md border mr-1 text-white" onClick={handleRegisterClick}>
+              Register
+            </button>
+            <button className="px-3 rounded-md border text-white" onClick={handleLoginClick}>
+              Login
+            </button>
+          </>
+        ) : (
+          <h1 className="text-white text-start">Hola, {user.name}!</h1>
+        )}
       </div>
+
+      <div className="flex-grow flex justify-center items-center">
+        <Image
+          src="/logotipo-MSM-04.png"
+          alt="Logo"
+          width={120}
+          height={80}
+          className="h-auto w-auto"
+        />
+      </div>
+
       {user && (
-        <button className="h-12 w-12 absolute inset-y-0 right-0 top-4 mr-2" id="logout-button" onClick={handleLogout}>
+        <button
+          className="h-12 w-12 flex items-center justify-center"
+          id="logout-button"
+          onClick={handleLogout}
+        >
           <Image src="/salida.png" alt="Logout" width={24} height={24} />
         </button>
       )}
     </header>
+
+
   );
 };
 

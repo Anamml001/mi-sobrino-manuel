@@ -44,7 +44,7 @@ export async function DELETE(req: NextRequest) {
 
         await removePost(userId!, postId);
 
-        return new NextResponse(null, { status: 201 });
+        return new NextResponse(null, { status: 204 });
     } catch (error) {
         const _error = (error as Error);
 
@@ -57,17 +57,11 @@ export async function DELETE(req: NextRequest) {
         return NextResponse.json({ error: ContentError.name, message: _error.message }, { status: 500 });
     }
 }
-//retrievePost
+//retrievePosts
 
 export async function GET(req: NextRequest) {
     try {
-
-        const { sub: userId } = verifyToken(req)
-        if (!userId) {
-            return NextResponse.json({ error: 'Unauthorized', message: 'Authorization header missing or invalid' }, { status: 401 });
-        }
-
-        const posts = await retrievePosts(userId!);
+        const posts = await retrievePosts();
 
         return NextResponse.json(posts, { status: 200 });
     } catch (error) {
