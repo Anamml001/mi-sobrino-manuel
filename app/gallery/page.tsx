@@ -16,12 +16,15 @@ function Gallery() {
 
     useEffect(() => {
         try {
-            logic.retrieveUser()
-                .then((user: userData) => setUser(user))
-                .catch((error: Error) => {
-                    console.error(error)
-                    alert((error as Error).message)
-                })
+            if (logic.isUserLoggedIn()) {
+                logic.retrieveUser()
+                    .then((user: userData) => setUser(user))
+                    .catch((error: Error) => {
+                        console.error(error)
+                        alert((error as Error).message)
+                    })
+
+            }
         } catch (error: any) {
             console.error(error)
             alert((error as Error).message)

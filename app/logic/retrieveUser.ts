@@ -6,9 +6,9 @@ const { SystemError } = errors;
 type ErrorKeys = keyof typeof errors;
 
 function retrieveUser(): Promise<any> {
-    validate.token(sessionStorage.token)
 
     const { sub: userId }: { sub: string } = extractPayload(sessionStorage.token)
+
 
     return fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${userId}`, {
         method: 'GET',
