@@ -52,7 +52,7 @@ function Gallery() {
                 <h1 className="mt-10 font-bold text-2xl text-center text-green-900">GALERÍA</h1>
 
                 {user?.role === 'admin' && (
-                    <button className="px-3" onClick={handleCreatePostClick}>➕</button>
+                    <button className="px-3 bg-slate-400 rounded-md content-center" onClick={handleCreatePostClick}> Crear Post➕</button>
                 )}
 
                 <Posts
