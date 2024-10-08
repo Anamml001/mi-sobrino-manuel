@@ -53,7 +53,9 @@ const Header: React.FC = () => {
 
   }, [loggedIn])
 
-
+  const handleHomeClick = (): void => {
+    router.push("/")
+  }
   const handleLoginClick = (): void => {
     router.push("/login")
   }
@@ -71,6 +73,17 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex items-center justify-between bg-teal-700 border-b-2 fixed top-0 w-full h-20 z-10 p-1"> {/* Cambié h-16 a h-20 */}
+
+
+      <div className="flex-grow flex justify-center items-center " onClick={handleHomeClick}>
+        <Image
+          src="/logotipo-MSM-04.png"
+          alt="Logo"
+          width={120}
+          height={80}
+          className="h-auto w-auto"
+        />
+      </div>
       <div className="flex items-center">
         {user === null ? (
           <>
@@ -82,23 +95,12 @@ const Header: React.FC = () => {
             </button>
           </>
         ) : (
-          <h1 className="text-white text-start">Hola, {user.name}!</h1>
+          <h1 className="text-white  ml-12 text-base text-center">Hola, {user.name}!</h1>
         )}
       </div>
-
-      <div className="flex-grow flex justify-center items-center">
-        <Image
-          src="/logotipo-MSM-04.png"
-          alt="Logo"
-          width={120}
-          height={80}
-          className="h-auto w-auto"
-        />
-      </div>
-
       {user && (
         <button
-          className="h-12 w-12 flex items-center justify-center"
+          className=" ml-10 h-12 w-12 flex items-center justify-center"
           id="logout-button"
           onClick={handleLogout}
         >
