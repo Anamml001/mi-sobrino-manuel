@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main className="flex-grow pt-20">{children}</main>
           <h2 className='w-full h-24 mb-11 mt-4 bg-cyan-900 text-center'>
-            <a className=" text-white text-3xl " href="https://www.instagram.com/misobrinomanuel/">Sigue a Misobrinomanuel en Instagram @misobrinomanuel</a>
+            <a className=" text-white text-2xl " href="https://www.instagram.com/misobrinomanuel/">Sigue a Misobrinomanuel en Instagram @misobrinomanuel</a>
           </h2>
           <Footer />
         </SessionContext.Provider>
