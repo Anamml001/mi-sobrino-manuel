@@ -174,6 +174,11 @@ function validateNumber(number: number, explain: string = 'number'): void {
     }
 }
 
+function validateStock(stock: boolean, explain: string = 'stock'): void {
+    if (typeof stock !== 'boolean')
+        throw new TypeError(`${explain} is not a boolean`);
+}
+
 const validate = {
     name: validateName,
     surname: validateSurname,
@@ -185,7 +190,8 @@ const validate = {
     url: validateUrl,
     token: validateToken,
     title: validateTitle,
-    number: validateNumber
+    number: validateNumber,
+    stock: validateStock
 };
 
 export default validate;

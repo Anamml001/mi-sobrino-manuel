@@ -33,13 +33,13 @@ interface CommentDoc extends Document {
 interface ProductDoc extends Document {
     name: string;
     image: string;
-    description: string;
-    stock: number;
+    stock: boolean;
     price: number;
 }
 
 interface ItemDoc extends Document {
     product: ProductDoc;
+    description: string;
     quantity: number;
 }
 
@@ -50,7 +50,13 @@ interface CartDoc extends Document {
 interface OrderDoc extends Document {
     buyer: typeof ObjectId;
     cart: CartDoc;
+    shippingAddress: string;
+    phoneNumber: number;
     date: Date;
+}
+
+interface LedgerDoc extends Document {
+    ledgers: LedgerDoc[]
 }
 
 // Definición de esquemas
@@ -144,12 +150,9 @@ const productSchema = new Schema<ProductDoc>({
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: true
-    },
     stock: {
-        type: Number,
+        type: Boolean,
+        default: true,
         required: true
     },
     price: {
@@ -160,6 +163,9 @@ const productSchema = new Schema<ProductDoc>({
 
 const itemSchema = new Schema<ItemDoc>({
     product: productSchema,
+    description: {
+        type: String,
+    },
     quantity: {
         type: Number,
         default: 1,
@@ -178,11 +184,23 @@ const orderSchema = new Schema<OrderDoc>({
         ref: "User"
     },
     cart: cartSchema,
+    shippingAddress: {
+        type: String,
+        required: true
+    },
+    phoneNumber: {
+        type: Number,
+
+    },
     date: {
         type: Date,
         required: true
     }
 });
+
+const ledgerSchema = new Schema<LedgerDoc>({
+
+})
 
 // Definición de modelos
 
@@ -193,7 +211,7 @@ const Product: Model<ProductDoc> = mongoose.models.Product || mongoose.model<Pro
 const Item: Model<ItemDoc> = mongoose.models.Item || mongoose.model<ItemDoc>("Item", itemSchema);
 const Cart: Model<CartDoc> = mongoose.models.Cart || mongoose.model<CartDoc>("Cart", cartSchema);
 const Order: Model<OrderDoc> = mongoose.models.Order || mongoose.model<OrderDoc>("Order", orderSchema);
-
+const Ledger: Model<LedgerDoc> = mongoose.models.Ledger || mongoose.model<LedgerDoc>("Ledger", ledgerSchema);
 export type {
     UserDoc,
     PostDoc,
@@ -201,7 +219,8 @@ export type {
     ProductDoc,
     ItemDoc,
     CartDoc,
-    OrderDoc
+    OrderDoc,
+    LedgerDoc
 }
 
 export {
@@ -211,5 +230,6 @@ export {
     Product,
     Item,
     Cart,
-    Order
+    Order,
+    Ledger
 };

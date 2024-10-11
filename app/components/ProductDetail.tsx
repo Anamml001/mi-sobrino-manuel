@@ -5,7 +5,7 @@ interface ProductDetailProps {
   price: string;
   image: string;
   onAddToCart: (quantity: number, size: string) => void;
-  onBack: () => void; // Añadir la función para volver
+  onBack: () => void;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ title, price, image, onAddToCart, onBack }) => {
@@ -20,23 +20,38 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ title, price, image, onAd
     setQuantity(Number(e.target.value));
   };
 
+  // Lista de tallas completa
+  const availableSizes = [
+    '1-2', '3-4', '5-6', '7-8', '9-10', '11-12', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL',
+  ];
+
+  // Verificar si el producto es una camiseta
+  const isShirt = title.toLowerCase().includes('camiseta');
+
   return (
     <div style={styles.container}>
       <img src={image} alt={title} style={styles.image} />
       <h2 style={styles.title}>{title}</h2>
       <p style={styles.price}>{price}</p>
-      <p style={styles.label}>Talle: {selectedSize}</p>
-      <div style={styles.sizes}>
-        {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-          <button
-            key={size}
-            style={selectedSize === size ? styles.sizeButtonActive : styles.sizeButton}
-            onClick={() => handleSizeClick(size)}
-          >
-            {size}
-          </button>
-        ))}
-      </div>
+
+      {/* Solo mostrar la opción de tallas si es una camiseta */}
+      {isShirt && (
+        <>
+          <p style={styles.label}>Talle: {selectedSize}</p>
+          <div style={styles.sizes}>
+            {availableSizes.map((size) => (
+              <button
+                key={size}
+                style={selectedSize === size ? styles.sizeButtonActive : styles.sizeButton}
+                onClick={() => handleSizeClick(size)}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
       <div style={styles.quantityContainer}>
         <input
           type="number"
@@ -85,6 +100,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   sizes: {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     marginBottom: '20px',
   },
@@ -93,7 +109,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     border: 'none',
     borderRadius: '50%',
     padding: '10px',
-    margin: '0 5px',
+    margin: '5px',
     cursor: 'pointer',
   },
   sizeButtonActive: {
@@ -102,7 +118,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     border: 'none',
     borderRadius: '50%',
     padding: '10px',
-    margin: '0 5px',
+    margin: '5px',
     cursor: 'pointer',
   },
   quantityContainer: {
@@ -134,7 +150,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     marginTop: '10px',
   },
   backButton: {
-    backgroundColor: '#e74c3c', // Color rojo para el botón
+    backgroundColor: '#e74c3c',
     color: '#fff',
     padding: '10px 20px',
     border: 'none',
