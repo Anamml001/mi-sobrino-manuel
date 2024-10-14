@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import { ReactNode, useState } from 'react';
 import logic from './logic';
 import SessionContext from './SessionContext';
+import InstagramLink from './components/InstagramLink';
 
 
 
@@ -18,9 +19,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SessionContext.Provider value={{ loggedIn, setLoggedIn: (loggedIn: boolean) => { setLoggedIn(loggedIn) } }}>
           <Header />
           <main className="flex-grow pt-20">{children}</main>
-          <h2 className='w-full h-24 mb-11 mt-4 bg-cyan-900 text-center'>
-            <a className=" text-white text-2xl " href="https://www.instagram.com/misobrinomanuel/">Sigue a Misobrinomanuel en Instagram @misobrinomanuel</a>
+          <h2 className="w-full h-24 mb-6 mt-2 bg-cyan-900 text-center flex items-center justify-center">
+            <span className="text-white text-2xl mb-14">Sigue a @misobrinomanuel en&nbsp;</span>
+            <a
+              href="https://www.instagram.com/misobrinomanuel/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center"
+            >
+              <InstagramLink />
+            </a>
           </h2>
+
+
+
           <Footer />
         </SessionContext.Provider>
       </body>

@@ -9,6 +9,7 @@ const Footer: React.FC = () => {
                 <Link className="text-white font-semibold" href="/recurses">
                     Recursos
                 </Link>
+
                 <Link className="text-white font-semibold" href="/donate">
                     Donar
                 </Link>
@@ -16,11 +17,13 @@ const Footer: React.FC = () => {
                 <Link className="text-white font-semibold" href="/gallery">
                     Galería
                 </Link>
-                <Link className="text-white font-semibold" href="/contact">
-                    Contacto
-                </Link>
+
                 <Link className="text-white font-semibold" href="/shop">
                     Tienda
+                </Link>
+
+                <Link className="text-white font-semibold" href="/contact">
+                    Contacto
                 </Link>
             </div>
             <FloatingWhatsAppButton />
