@@ -20,11 +20,11 @@ const InstagramLink: React.FC = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
 
-    // icon: {
-    //     filter: 'invert(100%)', // Si quieres que el ícono sea blanco sobre fondo de color, usa esta propiedad
-    //     marginBottom: '46px'
+    icon: {
+        filter: 'invert(100%)', // Si quieres que el ícono sea blanco sobre fondo de color, usa esta propiedad
 
-    // },
+
+    },
 };
 
 export default InstagramLink;
