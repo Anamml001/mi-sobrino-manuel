@@ -20,7 +20,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
           <main className="flex-grow pt-20">{children}</main>
           <h2 className="w-full h-24 mb-6 mt-2 bg-cyan-900 text-center flex items-center justify-center">
-            <span className="text-white text-2xl mb-14">Sigue a @misobrinomanuel en&nbsp;</span>
+            <span className="text-white text-lg md:text-2xl mb-7 md:mb-0">
+              Sigue a @misobrinomanuel en&nbsp;
+            </span>
             <a
               href="https://www.instagram.com/misobrinomanuel/"
               target="_blank"
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <InstagramLink />
             </a>
           </h2>
+
 
 
 
