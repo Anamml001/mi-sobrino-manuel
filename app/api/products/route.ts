@@ -35,8 +35,8 @@ export async function POST(req: NextRequest) {
 // Retrieve Products
 export async function GET(req: NextRequest) {
     try {
-        const { sub: userId } = verifyToken(req) as JwtPayload;
-        const products = await retrieveProducts(userId!);
+
+        const products = await retrieveProducts();
         return NextResponse.json(products, { status: 200 });
     } catch (error) {
         const _error = error as Error;

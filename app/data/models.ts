@@ -199,6 +199,7 @@ const orderSchema = new Schema<OrderDoc>({
 });
 
 const ledgerSchema = new Schema<LedgerDoc>({
+    ledgers: [orderSchema]
 
 })
 

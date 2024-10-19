@@ -1,1 +1,1 @@
-curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3Mjg2NDc2NTIsImV4cCI6MTcyODczNDA1Mn0.DMM4XFuT7T3O2VUHHygC261r8EXuNxEjbKwVt1OjbXQ' http://localhost:3000/api/products -v
+curl http://localhost:3000/api/products -v

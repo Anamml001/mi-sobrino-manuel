@@ -23,8 +23,8 @@ regular user
 - edit comment
 - remove comment
 - create order
-- cancel order
-- modify order
+- cancel order                                             
+                                                    
 
 ### UI Design
 
@@ -35,6 +35,7 @@ https://www.figma.com/design/PjnAnqxkvKaFJ1dRMr6TnD/WEB-PROJECT?node-id=1-2&t=Sk
 
 ### technologies
 - JavaScript
+- TypeScript
 - React
 - Node
 - Express

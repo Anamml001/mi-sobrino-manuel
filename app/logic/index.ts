@@ -13,6 +13,7 @@ import removeComment from "./removeComment";
 import modifyComment from "./modifyComment";
 import toggleLikePost from "./toggleLikePost";
 import getLoggedInUserId from "./getLoggedInUserId";
+import retrieveProducts from "./retrieveProducts";
 const logic = {
     registerUser,
     logoutUser,
@@ -28,7 +29,8 @@ const logic = {
     removeComment,
     modifyComment,
     toggleLikePost,
-    getLoggedInUserId
+    getLoggedInUserId,
+    retrieveProducts
 
 }
 

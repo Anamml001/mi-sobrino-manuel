@@ -29,8 +29,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               rel="noopener noreferrer"
               className="flex items-center"
             >
-              <InstagramLink />
             </a>
+            <InstagramLink />
           </h2>
 
 
