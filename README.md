@@ -23,7 +23,10 @@ regular user
 - edit comment
 - remove comment
 - create order
-- cancel order                                             
+- cancel order
+- add cart
+- remove cart
+- modify cart                                             
                                                     
 
 ### UI Design

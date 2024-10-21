@@ -1,0 +1,2 @@
+curl -X POST -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3Mjk1MTkxMTMsImV4cCI6MTcyOTYwNTUxM30.SKyftk2klg435GqCOu6iY3yKc1zyJXIU3S5yxBkuG8s' -H 'Content-type: application/json' -d '{"items":[{"id":"67139c2162ca7d485c83c361","description":"Camiseta verde xl","quantity":2},{"id":"67139c4262ca7d485c83c364","description":"Camiseta blanca xxl","quantity":2}]}' http://localhost:3000/api/cart -v
+

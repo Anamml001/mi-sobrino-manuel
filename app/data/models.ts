@@ -55,9 +55,9 @@ interface OrderDoc extends Document {
     date: Date;
 }
 
-interface LedgerDoc extends Document {
-    ledgers: LedgerDoc[]
-}
+// interface LedgerDoc extends Document {
+//     ledgers: LedgerDoc[]
+// }
 
 // Definición de esquemas
 
@@ -198,10 +198,10 @@ const orderSchema = new Schema<OrderDoc>({
     }
 });
 
-const ledgerSchema = new Schema<LedgerDoc>({
-    ledgers: [orderSchema]
+// const ledgerSchema = new Schema<LedgerDoc>({
+//     ledgers: [orderSchema]
 
-})
+// })
 
 // Definición de modelos
 
@@ -212,7 +212,7 @@ const Product: Model<ProductDoc> = mongoose.models.Product || mongoose.model<Pro
 const Item: Model<ItemDoc> = mongoose.models.Item || mongoose.model<ItemDoc>("Item", itemSchema);
 const Cart: Model<CartDoc> = mongoose.models.Cart || mongoose.model<CartDoc>("Cart", cartSchema);
 const Order: Model<OrderDoc> = mongoose.models.Order || mongoose.model<OrderDoc>("Order", orderSchema);
-const Ledger: Model<LedgerDoc> = mongoose.models.Ledger || mongoose.model<LedgerDoc>("Ledger", ledgerSchema);
+// const Ledger: Model<LedgerDoc> = mongoose.models.Ledger || mongoose.model<LedgerDoc>("Ledger", ledgerSchema);
 export type {
     UserDoc,
     PostDoc,
@@ -221,7 +221,7 @@ export type {
     ItemDoc,
     CartDoc,
     OrderDoc,
-    LedgerDoc
+    // LedgerDoc
 }
 
 export {
@@ -232,5 +232,5 @@ export {
     Item,
     Cart,
     Order,
-    Ledger
+    // Ledger
 };
