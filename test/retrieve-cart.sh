@@ -1,0 +1,1 @@
+curl -X GET -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjlhN2E0MDAwMTVhNDAzMmM3YWJiZGUiLCJpYXQiOjE3Mjk3NzEyNjQsImV4cCI6MTcyOTg1NzY2NH0.XVSHATmD3YZPq4vK8fGxAOnC7OGIKszsgcK1S1s5Cu8' -H 'Content-type: application/json' http://localhost:3000/api/cart -v
